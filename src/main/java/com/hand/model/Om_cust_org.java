@@ -1,67 +1,66 @@
 package com.hand.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+@Entity
+@Table(name="om_cust_org")
 public class Om_cust_org {
 	private int org_id;
-	private int cust_id;
-	private String mailform;
-	private String prepo_mailto;
-	private String po_mailto;
-	private String ocpi_mailto;
-	private String inv_pklist_mailto;
+	private String market_area;
+	private String bussiness_manager;
+	private String bussiness_assistant;
+	
 	public Om_cust_org() {
 	}
-	public Om_cust_org(int org_id, int cust_id, String mailform, String prepo_mailto, String po_mailto,
-			String ocpi_mailto, String inv_pklist_mailto) {
+	public Om_cust_org(int org_id,String market_area, String bussiness_manager, String bussiness_assistant) {
 		super();
 		this.org_id = org_id;
-		this.cust_id = cust_id;
-		this.mailform = mailform;
-		this.prepo_mailto = prepo_mailto;
-		this.po_mailto = po_mailto;
-		this.ocpi_mailto = ocpi_mailto;
-		this.inv_pklist_mailto = inv_pklist_mailto;
+		this.market_area = market_area;
+		this.bussiness_manager = bussiness_manager;
+		this.bussiness_assistant = bussiness_assistant;
 	}
+	
+	
+	@Id  
+	@GeneratedValue(strategy = GenerationType.AUTO) 
 	public int getOrg_id() {
 		return org_id;
 	}
 	public void setOrg_id(int org_id) {
 		this.org_id = org_id;
 	}
-	public int getCust_id() {
-		return cust_id;
+	
+	@Column(name="market_area")
+	public String getMarket_area() {
+		return market_area;
 	}
-	public void setCust_id(int cust_id) {
-		this.cust_id = cust_id;
+	public void setMarket_area(String market_area) {
+		this.market_area = market_area;
 	}
-	public String getMailform() {
-		return mailform;
+	
+	@Column(name="bussiness_manager")
+	public String getBussiness_manager() {
+		return bussiness_manager;
 	}
-	public void setMailform(String mailform) {
-		this.mailform = mailform;
+	public void setBussiness_manager(String bussiness_manager) {
+		this.bussiness_manager = bussiness_manager;
 	}
-	public String getPrepo_mailto() {
-		return prepo_mailto;
+	
+	@Column(name="bussiness_assistant")
+	public String getBussiness_assistant() {
+		return bussiness_assistant;
 	}
-	public void setPrepo_mailto(String prepo_mailto) {
-		this.prepo_mailto = prepo_mailto;
+	public void setBussiness_assistant(String bussiness_assistant) {
+		this.bussiness_assistant = bussiness_assistant;
 	}
-	public String getPo_mailto() {
-		return po_mailto;
-	}
-	public void setPo_mailto(String po_mailto) {
-		this.po_mailto = po_mailto;
-	}
-	public String getOcpi_mailto() {
-		return ocpi_mailto;
-	}
-	public void setOcpi_mailto(String ocpi_mailto) {
-		this.ocpi_mailto = ocpi_mailto;
-	}
-	public String getInv_pklist_mailto() {
-		return inv_pklist_mailto;
-	}
-	public void setInv_pklist_mailto(String inv_pklist_mailto) {
-		this.inv_pklist_mailto = inv_pklist_mailto;
-	}
+	
 
 }
