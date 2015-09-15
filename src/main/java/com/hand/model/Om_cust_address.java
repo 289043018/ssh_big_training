@@ -1,10 +1,10 @@
 package com.hand.model;
 
 import java.security.Timestamp;
-import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Repository;
@@ -45,6 +45,8 @@ public class Om_cust_address {
 		this.inactive_date = inactive_date;
 	}
 	
+	
+	@Id
 	@Column(name="address_id")
 	public int getAddress_id() {
 		return address_id;

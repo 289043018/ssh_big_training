@@ -25,6 +25,12 @@
 <property name="sessionFactory" ref="sessionFactory"/>
 </bean>
 
+<bean name="userDao" class="com.hand.dao.impl.UserDaoImpl">
+<property name="sessionFactory" ref="sessionFactory"/>
+</bean>
+
+
+
 		<!-- 开启用注解方式注入bean -->
 		<context:annotation-config />
     	<!-- 自动扫描dao(自动注入) -->
