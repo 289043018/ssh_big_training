@@ -4,6 +4,8 @@ import java.security.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -47,6 +49,7 @@ public class Om_cust_address {
 	
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO) 
 	@Column(name="address_id")
 	public int getAddress_id() {
 		return address_id;

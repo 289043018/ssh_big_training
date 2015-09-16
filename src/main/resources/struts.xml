@@ -30,12 +30,14 @@
 		</action>
 		<action name="*_*" class="com.hand.action.{1}Action" method="{2}">
 		<interceptor-ref name="defaultStack"/>
-		<result name="success" type="redirectAction">listCustomer!list</result>
+		<!-- <result name="success" type="redirectAction">listCustomer!list</result> -->
+		<result name="success">/jsp/success.jsp</result>
 		<result name="toadd">/jsp/addCustomer.jsp</result>
 		<result name="toupdate">/jsp/edit.jsp</result>
 		<result name="tologin" type="redirect">
 			<param name="location">/jsp/login.jsp</param>
 			</result>
+		<result name="show_success" type="redirect">/jsp/showCustomer.jsp</result>
 		</action>
 	</package>
 	

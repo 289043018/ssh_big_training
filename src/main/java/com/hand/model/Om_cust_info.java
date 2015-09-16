@@ -1,11 +1,6 @@
 package com.hand.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.stereotype.Repository;
 
@@ -19,12 +14,13 @@ public class Om_cust_info {
 	private String type;
 	private String group_company;
 	private String corporation;
-	private int org_id;
-	private int discount_id;
+	private Om_cust_org org;
+	private Om_cust_address address;
+	private Om_normal_discount discount;
 	public Om_cust_info() {
 	}
 	public Om_cust_info(int cust_id, String customer_code, String customer_name, String type, String group_company,
-			String corporation, int org_id, int discount_id) {
+			String corporation, Om_cust_org org, Om_normal_discount discount,Om_cust_address address) {
 		super();
 		this.cust_id = cust_id;
 		this.customer_code = customer_code;
@@ -32,8 +28,9 @@ public class Om_cust_info {
 		this.type = type;
 		this.group_company = group_company;
 		this.corporation = corporation;
-		this.org_id = org_id;
-		this.discount_id = discount_id;
+		this.org = org;
+		this.discount = discount;
+		this.address=address;
 	}
 	
 	
@@ -86,21 +83,35 @@ public class Om_cust_info {
 		this.corporation = corporation;
 	}
 	
-	@Column(name="org_id")
-	public int getOrg_id() {
-		return org_id;
+	
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="discount_id")
+	public Om_normal_discount getDiscount() {
+		return discount;
 	}
-	public void setOrg_id(int org_id) {
-		this.org_id = org_id;
+	public void setDiscount(Om_normal_discount discount) {
+		this.discount = discount;
 	}
 	
-	@Column(name="Discount_id")
-	public int getDiscount_id() {
-		return discount_id;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="org_id")
+	public Om_cust_org getOrg() {
+		return org;
 	}
-	public void setDiscount_id(int discount_id) {
-		this.discount_id = discount_id;
+	public void setOrg(Om_cust_org org) {
+		this.org = org;
+	}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="address_id")
+	public Om_cust_address getAddress() {
+		return address;
+	}
+	public void setAddress(Om_cust_address address) {
+		this.address = address;
 	}
 
+	
 
 }

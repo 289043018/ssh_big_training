@@ -57,6 +57,7 @@ public class LoginAction extends ActionSupport {
 //		 	        	int pagecount = pageDao.getPageCount();
 //		 	        	System.out.println("获得的总页数："+pagecount);
 //		 	        	session.setAttribute("pagecount", pagecount);
+		 	        	session.setAttribute("flag", "login_success");
 		 	        	return SUCCESS;  
 		 	        }
 		 	        session.setAttribute("login_message", "用户名或者密码错误！");
