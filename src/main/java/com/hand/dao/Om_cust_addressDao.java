@@ -1,0 +1,13 @@
+package com.hand.dao;
+
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import com.hand.model.Om_cust_address;
+@Component
+public interface Om_cust_addressDao {
+	public List<Om_cust_address> findByStatus(String status);
+	public Om_cust_address findByID(int address_id);
+
+}

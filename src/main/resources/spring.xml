@@ -31,6 +31,7 @@
 
 
 
+
 		<!-- 开启用注解方式注入bean -->
 		<context:annotation-config />
     	<!-- 自动扫描dao(自动注入) -->

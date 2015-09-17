@@ -1,12 +1,17 @@
 package com.hand.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.hand.dao.Om_cust_orgDao;
+import com.hand.model.Om_cust_address;
 import com.hand.model.Om_cust_info;
 import com.hand.model.Om_cust_org;
 
@@ -29,5 +34,7 @@ public class Om_cust_orgDaoImpl implements Om_cust_orgDao {
 		System.out.println("查找到了："+om_cust_org.getOrg_id());
 		return om_cust_org;
 	}
+
+
 
 }

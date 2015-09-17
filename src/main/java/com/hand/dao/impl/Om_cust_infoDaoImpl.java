@@ -1,8 +1,10 @@
 package com.hand.dao.impl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import com.hand.dao.Om_cust_infoDao;
 import com.hand.model.Customer;
+import com.hand.model.Om_cust_address;
 import com.hand.model.Om_cust_info;
 
 
@@ -44,6 +47,79 @@ public class Om_cust_infoDaoImpl implements Om_cust_infoDao {
 		
 		return om_cust_info;
 	}
+	
+	public List<Om_cust_info> findByCode(String customer_code) {
+		session = sessionFactory.getCurrentSession();
+		System.out.println("开始按CODE查找");
+//		List<Om_cust_info> om_cust_info = session.createQuery("FROM Om_cust_info where customer_name="+customer_name).list();
+		Criteria cr = session.createCriteria(Om_cust_info.class);    
+		cr.add(Restrictions.like("customer_code", customer_code));  
+		List<Om_cust_info> om_cust_info = cr.list();  
+		System.out.println("结束按CODE查找");
+		return om_cust_info;
+	}
+	public List<Om_cust_info> findByType(String Type) {
+		session = sessionFactory.getCurrentSession();
+		System.out.println("开始按Type查找");
+//		List<Om_cust_info> om_cust_info = session.createQuery("FROM Om_cust_info where customer_name="+customer_name).list();
+		Criteria cr = session.createCriteria(Om_cust_info.class);    
+		cr.add(Restrictions.like("type", Type));  
+		List<Om_cust_info> om_cust_info = cr.list();  
+		System.out.println("结束按Type查找");
+		return om_cust_info;
+	}
+	
+	public List<Om_cust_info> findByGroup_company(String group_company) {
+		session = sessionFactory.getCurrentSession();
+		System.out.println("开始按Type查找");
+//		List<Om_cust_info> om_cust_info = session.createQuery("FROM Om_cust_info where customer_name="+customer_name).list();
+		Criteria cr = session.createCriteria(Om_cust_info.class);    
+		cr.add(Restrictions.like("group_company", group_company));  
+		List<Om_cust_info> om_cust_info = cr.list();  
+		System.out.println("结束按Type查找");
+		return om_cust_info;
+	}
+
+	public List<Om_cust_info> findByCorporation(String corporation) {
+		session = sessionFactory.getCurrentSession();
+		System.out.println("开始按Type查找");
+//		List<Om_cust_info> om_cust_info = session.createQuery("FROM Om_cust_info where customer_name="+customer_name).list();
+		Criteria cr = session.createCriteria(Om_cust_info.class);    
+		cr.add(Restrictions.like("corporation", corporation));  
+		List<Om_cust_info> om_cust_info = cr.list();  
+		System.out.println("结束按Type查找");
+		return om_cust_info;
+	}
+	
+	public Om_cust_info findByAddress(int address_id) {
+		session = sessionFactory.getCurrentSession();
+		
+		String hql = "FROM Om_cust_info  WHERE address_id = :address_id";
+		Query query = session.createQuery(hql);
+		query.setParameter("address_id",address_id);
+		List<Om_cust_info> results =  query.list();
+		Iterator<Om_cust_info> it = results.iterator();
+		while (it.hasNext()) {
+			om_cust_info = it.next();
+		}
+		return om_cust_info;
+	}
+	
+	public Om_cust_info findByOrg(int org_id) {
+		session = sessionFactory.getCurrentSession();
+		
+		String hql = "FROM Om_cust_org  WHERE org_id = :org_id";
+		Query query = session.createQuery(hql);
+		query.setParameter("org_id",org_id);
+		List<Om_cust_info> results =  query.list();
+		Iterator<Om_cust_info> it = results.iterator();
+		while (it.hasNext()) {
+			om_cust_info = it.next();
+		}
+		return om_cust_info;
+	}
+	
+	
 
 	public void create(Om_cust_info om_cust_info) {
 		session = sessionFactory.getCurrentSession();
@@ -61,6 +137,16 @@ public class Om_cust_infoDaoImpl implements Om_cust_infoDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
+	
+
+	
+
+	
+
+	
+
+	
 
 	
 	
