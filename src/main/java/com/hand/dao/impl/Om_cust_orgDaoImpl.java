@@ -44,6 +44,13 @@ public class Om_cust_orgDaoImpl implements Om_cust_orgDao {
 		return om_cust_org;
 	}
 
+
+	public void update(Om_cust_org om_cust_org) {
+		session = sessionFactory.getCurrentSession();
+		session.update(om_cust_org);
+		
+	}
+
 	
 
 

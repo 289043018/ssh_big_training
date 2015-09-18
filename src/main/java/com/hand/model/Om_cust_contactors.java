@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 public class Om_cust_contactors {
 	private int cont_id;
 	private int cust_id;
-	private String mailform;
+	private String mailfrom;
 	private String prepr_mailto;
 	private String po_mailto;
 	private String ocpi_mailto;
@@ -27,7 +27,7 @@ public class Om_cust_contactors {
 		super();
 		this.cont_id = cont_id;
 		this.cust_id = cust_id;
-		this.mailform = mailform;
+		this.mailfrom = mailform;
 		this.prepr_mailto = prepr_mailto;
 		this.po_mailto = po_mailto;
 		this.ocpi_mailto = ocpi_mailto;
@@ -51,12 +51,12 @@ public class Om_cust_contactors {
 		this.cust_id = cust_id;
 	}
 	
-	@Column(name="mailform")
-	public String getMailform() {
-		return mailform;
+	@Column(name="mailfrom")
+	public String getMailfrom() {
+		return mailfrom;
 	}
-	public void setMailform(String mailform) {
-		this.mailform = mailform;
+	public void setMailfrom(String mailform) {
+		this.mailfrom = mailform;
 	}
 	
 	@Column(name="prepr_mailto")

@@ -119,7 +119,11 @@ public class Om_cust_infoDaoImpl implements Om_cust_infoDao {
 		return om_cust_info;
 	}
 	
+	public void update(Om_cust_info om_cust_info) {
+		session = sessionFactory.getCurrentSession();
+		session.update(om_cust_info);
 	
+	}
 
 	public int create(Om_cust_info om_cust_info) {
 		session = sessionFactory.getCurrentSession();
@@ -137,6 +141,8 @@ public class Om_cust_infoDaoImpl implements Om_cust_infoDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
+	
 
 	
 

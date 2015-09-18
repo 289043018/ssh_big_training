@@ -1,6 +1,7 @@
 package com.hand.model;
 
 import java.security.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,13 +27,13 @@ public class Om_cust_address {
 	private String port_of_destination;
 	private String shipping_mark;
 	private String status;
-	private Timestamp inactive_date;
+	private Date inactive_date;
 	
 	
 	public Om_cust_address() { 
 	}
 	public Om_cust_address(int address_id, String country, String state, String city, String address1, String address2,
-			String postcode, String port_of_destination, String shipping_mark, String status, Timestamp inactive_date) {
+			String postcode, String port_of_destination, String shipping_mark, String status, Date inactive_date) {
 		super();
 		this.address_id = address_id;
 		this.country = country;
@@ -130,11 +131,11 @@ public class Om_cust_address {
 		this.status = status;
 	}
 	
-	@Column(name="inactive_date",columnDefinition="Timestamp")
-	public Timestamp getInactive_date() {
+	@Column(name="inactive_date",columnDefinition="Date")
+	public Date getInactive_date() {
 		return inactive_date;
 	}
-	public void setInactive_date(Timestamp inactive_date) {
+	public void setInactive_date(Date inactive_date) {
 		this.inactive_date = inactive_date;
 	}
 

@@ -20,6 +20,8 @@ public class Om_cust_contactorsDaoImpl implements Om_cust_contactorsDao {
 	private SessionFactory sessionFactory;
 	private Session session;
 	
+	Om_cust_contactors om_cust_contactors = new Om_cust_contactors();
+	
 	public void create(Om_cust_contactors om_cust_contactors) {
 		session = sessionFactory.getCurrentSession();
 		session.save(om_cust_contactors);
@@ -52,6 +54,17 @@ public class Om_cust_contactorsDaoImpl implements Om_cust_contactorsDao {
 
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
+	}
+
+	public void update(Om_cust_contactors om_cust_contactors) {
+		session = sessionFactory.getCurrentSession();
+		session.update(om_cust_contactors);
+	}
+
+	public Om_cust_contactors findById(int cont_id) {
+		session = sessionFactory.getCurrentSession();
+		om_cust_contactors = (Om_cust_contactors) session.get(Om_cust_contactors.class, cont_id);
+		return om_cust_contactors;
 	}
 
 	

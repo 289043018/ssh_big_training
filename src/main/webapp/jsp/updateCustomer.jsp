@@ -18,7 +18,7 @@
 	alert("正在加载数据，请稍后...."),
 		$.ajax({
 			   type: "POST",
-			   url: "Text_showdetail!showdetail.do?cust_id="+$("input[name='show_id']").val(),
+			   url: "Text_showdetail!showdetail.do?cust_id="+$("input[name='cust_id']").val(),
 			   dataType:"json",
 			   success:function(data) {
 				  /*  加载客户信息 */
@@ -30,17 +30,21 @@
 					
 					
 					/* 加载地址信息 */
+					$("input[name='address_id']").val(data.address_id);
 					$("select[name='country']").val(data.country);
+					$("input[name='state']").val(data.state);
+					$("input[name='city']").val(data.city);
 					$("input[name='port_of_destination']").val(data.port_of_destination);
 					$("input[name='address1']").val(data.address1);
 					$("input[name='address2']").val(data.address2);
 					$("input[name='postcode']").val(data.postcode);
 					$("input[name='shipping_mark']").val(data.shipping_mark);
 					$("input[name='status']").val(data.status);
-					
+					$("input[name='inactive_date']").val(data.inactive_date);
 					
 					
 					/* 加载付款信息 */
+					$("input[name='payment_id']").val(data.payment_id);
 					$("input[name='invoice_group']").val(data.invoice_group);
 					$("input[name='markup_name']").val(data.markup_name);
 					$("input[name='currency']").val(data.currency);
@@ -53,11 +57,13 @@
 					
 					
 					/* 加载组织信息 */
+					$("input[name='org_id']").val(data.org_id);
 					$("select[name='market_area']").val(data.market_area);
 					$("input[name='bussiness_manager']").val(data.bussiness_manager);
 					$("input[name='bussiness_assistant']").val(data.bussiness_assistant);
 					
 					/* 加载联系人信息 */
+					$("input[name='cont_id']").val(data.cont_id);
 					$("input[name='mailfrom']").val(data.mailfrom);
 					$("input[name='prepr_mailto']").val(data.prepr_mailto);
 					$("input[name='po_mailto']").val(data.po_mailto);
@@ -67,24 +73,109 @@
 				}
 			});
 			alert("数据加载完毕！")
-
+		/* 	alert($("#form1").serialize());  */
 	
  }); 
+ 
+ 
+
+
+$(document).ready(function () {
+	$("#save_cust").click(function(){
+		alert($("#form_cust").serialize());
+		
+		$.ajax({
+			 type: "POST",
+			   url: "Text_updateCust!updateCust.do?"+$("#form_cust").serialize(),
+			   dataType:"json",
+			   success:function(){
+				   alert("保存成功");
+			   }
+		});
+
+	});
+});
+
+$(document).ready(function () {
+	$("#save_address").click(function(){
+		alert($("#form_address").serialize());
+		
+		$.ajax({
+			 type: "POST",
+			   url: "Text_updateAddress!updateAddress.do?"+$("#form_address").serialize(),
+			   dataType:"json",
+			   success:function(){
+				   alert("保存成功");
+			   }
+		});
+
+	});
+});
+
+$(document).ready(function () {
+	$("#save_org").click(function(){
+		alert($("#form_org").serialize());
+		
+		$.ajax({
+			 type: "POST",
+			   url: "Text_updateOrg!updateOrg.do?"+$("#form_org").serialize(),
+			   dataType:"json",
+			   success:function(){
+				   alert("保存成功");
+			   }
+		});
+
+	});
+});
+ 
+$(document).ready(function () {
+	$("#save_payment").click(function(){
+		alert($("#form_payment").serialize());
+		
+		$.ajax({
+			 type: "POST",
+			   url: "Text_updatePayment!updatePayment.do?"+$("#form_payment").serialize(),
+			   dataType:"json",
+			   success:function(){
+				   alert("保存成功");
+			   }
+		});
+
+	});
+});
+ 
+ 
+$(document).ready(function () {
+	$("#save_cont").click(function(){
+		alert($("#form_cont").serialize());
+		
+		$.ajax({
+			 type: "POST",
+			   url: "Text_updateCont!updateCont.do?"+$("#form_cont").serialize(),
+			   dataType:"json",
+			   success:function(){
+				   alert("保存成功");
+			   }
+		});
+
+	});
+});
+ 
+ 
+ 
+ 
 </script>
 
 </head>
 <body>
-<input id="cust_id" type=hidden value="${cust_id}" name="show_id"/> 
+
 <!-- type=hidden  -->
 
-<div class="customer" >
-
-</div>
-<form action="<%=path %>/Text_create_customer!create_customer.do" Method="POST">
+	<form id="form_cust">
 	
+	<input id="cust_id" type=hidden value="${cust_id}" name="cust_id"/> 
 	<!-- <button type="submit" id="xinjian">新建</button><button type="reset">重置</button> -->
-	*客户名称：<input type="text" name="customer_name" class="form-control"
-			placeholder="客户名称" class="required" > 
+	*客户名称：<input type="text" name="customer_name" class="form-control" placeholder="客户名称" class="required" > 
 			*客户简称：<!-- <input type="text" name="customer_code" class="form-control" placeholder="客户简称" class="required" maxlength="10"> -->
 			<select name="customer_code">
 		 				<option value="ATW-J">ATW-J</option>
@@ -103,9 +194,17 @@
 			集团公司：<input type="text" name="group_company" class="form-control" placeholder="集团公司" maxlength="10"> 
 			总公司：<input type="text" name="corporation" class="form-control" placeholder="总公司" maxlength="10">
 			
-			<button>保存</button>
+			<button type="button"  id="save_cust">保存</button>
+	时间:<input type="date" />
+	</form>
+	
 			<br><br><br><br><br><br>
-			 地址信息：<br>
+			
+			
+		<form id="form_address">
+		地址信息：<br>
+			 <input id="cust_id" type=hidden value="${cust_id}" name="cust_id"/>
+			 <input id="address_id" type=hidden  name="address_id"/> 
 		*国家： <select name="country">
 			<option value="Afghanistan">Afghanistan</option>
 			<option value="Albania">Albania</option>
@@ -177,16 +276,29 @@
 			<option value="Uruguay">Uruguay</option>
 			<option selected value="USA">USA</option>
 		</select> 
+		州/省:<input type="text" name="state" readonly="readonly"   />
+		* 城市:<input type="text" name="city" readonly="readonly"  class="required"  />
 		*目的巷：<input type="text" name="port_of_destination" class="required"> 
-		*地址1：<input
-			type="text" name="address1" class="required"> 
-			地址2：<input type="text" name="address2"> 
-			邮编：<input type="text" name="postcode">
+		*地址1：<input type="text" name="address1" class="required"> 
+		地址2：<input type="text" name="address2"> 
+		邮编：<input type="text" name="postcode">
 		*唛头：<input type="text" name="shipping_mark" class="required"> 
-		状态：<input type="text" name="status" value="待确认" readonly="readonly"> <br>
+		状态：<input type="text" name="status" value="待确认" readonly="readonly">
+		失效日期：<input type="text" name="inactive_date" placeholder="yyyy-mm-dd">
+		 <br>
+			<button type="button" id="save_address" >保存</button>
+		</form>
+			
+			
+			
+			 
 		<br>
 		<br> 
 		
+		
+		
+		<form id="form_payment">
+		<input id="payment_id" type=hidden  name="payment_id"/> 
 		付款信息：<br>
 所属发票组： <input type="text" name="invoice_group"> 
 * 通用加价条款：<input type="text" name="markup_name" class="required"> 
@@ -196,12 +308,20 @@
     价格条款1：<input type="text" name="price_term1"> 
      价格条款2：<input type="text" name="price_term2"> 
 		价格条款3：<input type="text" name="price_term3"> 
+		
+		<button type="button" id="save_payment" >保存</button>
+		</form>
+		
 		 <br>
 		<br>
 		<br> 
 		
 		
+		
+		<form id="form_org">
+	
 		组织信息：<br>
+		<input id="org_id" type=hidden  name="org_id"/> 
 		 * 所属TEAM：<!-- <input type="text" name="market_area" class="required">  -->
 		 			<select name="market_area">
 		 				<option value="德国">德国</option>
@@ -214,16 +334,26 @@
 		 
 		  * 业务经理： <input type="text" name="bussiness_manager" class="required"> 
 		  * 业务助理： <input type="text" name="bussiness_assistant" class="required"> 
+		  
+		  <button type="button" id="save_org" >保存</button>
+		
+		</form>
 		  <br>
 		<br>
 		<br>
+		
+		
+		<form id="form_cont">
+		<input id="cont_id" type=hidden  name="cont_id"/> 
 		 联系人信息：<br>
 		 发件人邮箱： <input type="text" name="mailfrom"> 
 		 Pre PO 收件人：<input type="text" name="prepr_mailto"> 
 		  PO 收件人：<input type="text" name="po_mailto"> 
 		   OC/PI收件人：<input type="text" name="ocpi_mailto"> 
 		INV/Packing list 收件：<input type="text" name="inv_pklist_mailto"> 
+		<button type="button" id="save_cont" >保存</button>
+		</form>
+		
 
-	</form>
 </body>
 </html>

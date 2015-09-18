@@ -3,6 +3,7 @@ package com.hand.action;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -40,14 +41,20 @@ public class TextAction extends ActionSupport  {
 	private String group_company;
 	private String corporation;
 	//地址参数
+	private int address_id;
 	private String country;
 	private String port_of_destination;
 	private String address1;
 	private String address2;
 	private String postcode;
 	private String shipping_mark;
+	private String state;
+	private String city;
+	private Date inactive_date;
+	
 	
 	//付款信息
+	private int payment_id;
 	private String invoice_group;
 	private String markup_name;
 	private String currency;
@@ -59,6 +66,7 @@ public class TextAction extends ActionSupport  {
 	
 	
 	//组织信息
+	private int org_id;
 	private String market_area;
 	private String bussiness_manager;
 	private String bussiness_assistant;
@@ -66,6 +74,7 @@ public class TextAction extends ActionSupport  {
 	
 	
 	//联系人信息
+	private int cont_id;
 	private String mailfrom;
 	private String prepr_mailto;
 	private String po_mailto;
@@ -110,6 +119,11 @@ public class TextAction extends ActionSupport  {
 		om_cust_address.setPostcode(postcode);
 		om_cust_address.setShipping_mark(shipping_mark);
 		om_cust_address.setStatus(status);
+		om_cust_address.setState(state);
+		om_cust_address.setCity(city);
+		om_cust_address.setInactive_date(inactive_date);
+		
+		
 		om_cust_addressDao.create(om_cust_address);
 
 		//设置用户表的地址对象
@@ -170,7 +184,7 @@ public class TextAction extends ActionSupport  {
 //		System.out.println(po_mailto);
 //		System.out.println(ocpi_mailto);
 //		System.out.println(inv_pklist_mailto);
-		om_cust_contactors.setMailform(mailfrom);
+		om_cust_contactors.setMailfrom(mailfrom);
 		om_cust_contactors.setPrepr_mailto(prepr_mailto);
 		om_cust_contactors.setPo_mailto(po_mailto);
 		om_cust_contactors.setOcpi_mailto(ocpi_mailto);
@@ -179,13 +193,7 @@ public class TextAction extends ActionSupport  {
 		om_cust_contactorsDao.create(om_cust_contactors);
 
 	}
-	
-	
-	
-	
-	
-	
-	
+
 	//按ID查找客户信息
 	public void find(){
 		Om_cust_info om_cust_info = om_cust_infoDao.findById(4);
@@ -260,19 +268,6 @@ public class TextAction extends ActionSupport  {
 //		ActionContext.getContext().put("om_cust_infoList", om_cust_infoList);
 	}
 	
-	public String toshowdetail(){
-		return "for_showdetail";
-	}
-	
-	public String toupdatedetail(){
-		return "for_updatedetail";
-	}
-	
-	
-	
-	
-	
-	
 	public void showdetail() throws IOException{
 		System.out.println(cust_id);
 		om_cust_info = om_cust_infoDao.findById(cust_id);
@@ -305,7 +300,8 @@ public class TextAction extends ActionSupport  {
 //		(shipping_mark);
 		//所有信息都会返回它的ID
 		lan.addProperty("address_id", om_cust_address.getAddress_id());
-		
+		lan.addProperty("state", om_cust_address.getState());
+		lan.addProperty("city", om_cust_address.getCity());
 		lan.addProperty("country", om_cust_address.getCountry());
 		lan.addProperty("port_of_destination", om_cust_address.getPort_of_destination());
 		lan.addProperty("address1", om_cust_address.getAddress1());
@@ -313,6 +309,8 @@ public class TextAction extends ActionSupport  {
 		lan.addProperty("postcode", om_cust_address.getPostcode());
 		lan.addProperty("shipping_mark", om_cust_address.getShipping_mark());
 		lan.addProperty("status", om_cust_address.getStatus());
+		String date_str =  om_cust_address.getInactive_date().toString();
+		lan.addProperty("inactive_date",date_str);
 		
 		//添加付款信息到json对象
 //		(invoice_group);
@@ -345,7 +343,7 @@ public class TextAction extends ActionSupport  {
 		lan.addProperty("org_id", om_cust_org.getOrg_id());
 		
 		lan.addProperty("market_area", om_cust_org.getMarket_area());
-		lan.addProperty("bussiness_manager", om_cust_org.getBussiness_assistant());
+		lan.addProperty("bussiness_manager", om_cust_org.getBussiness_manager());
 		lan.addProperty("bussiness_assistant", om_cust_org.getBussiness_assistant());
 		
 		
@@ -357,7 +355,7 @@ public class TextAction extends ActionSupport  {
 //		(inv_pklist_mailto);
 		//所有信息都会返回它的ID
 		lan.addProperty("cont_id", om_cust_contactors.getCont_id());
-		lan.addProperty("mailfrom", om_cust_contactors.getMailform());
+		lan.addProperty("mailfrom", om_cust_contactors.getMailfrom());
 		lan.addProperty("prepr_mailto", om_cust_contactors.getPrepr_mailto());
 		lan.addProperty("po_mailto", om_cust_contactors.getPo_mailto());
 		lan.addProperty("ocpi_mailto", om_cust_contactors.getOcpi_mailto());
@@ -375,6 +373,114 @@ public class TextAction extends ActionSupport  {
 		
 	}
 	
+	public void updateCust(){
+//		System.out.println("用户信息：");
+//		System.out.println(cust_id);
+//		System.out.println(customer_name);
+//		System.out.println(customer_code);
+//		System.out.println(type);
+//		System.out.println(group_company);
+//		System.out.println(corporation);
+		om_cust_info = om_cust_infoDao.findById(cust_id);
+		om_cust_info.setCustomer_code(customer_code);
+		om_cust_info.setCustomer_name(customer_name);
+		om_cust_info.setType(type);
+		om_cust_info.setGroup_company(group_company);
+		om_cust_info.setCorporation(corporation);
+		om_cust_infoDao.update(om_cust_info);
+		System.out.println("保存成功");
+	}
+	
+	public void updateAddress(){
+//		System.out.println("地址信息：");
+//		System.out.println(address_id);
+//		System.out.println(country);
+//		System.out.println(port_of_destination);
+//		System.out.println(address1);
+//		System.out.println(address2);
+//		System.out.println(postcode);
+//		System.out.println(shipping_mark);
+//		System.out.println(status);
+		om_cust_address = om_cust_addressDao.findByID(address_id);
+		om_cust_address.setCountry(country);
+		om_cust_address.setState(state);
+		om_cust_address.setCity(city);
+		om_cust_address.setPort_of_destination(port_of_destination);
+		om_cust_address.setAddress1(address1);
+		om_cust_address.setAddress2(address2);
+		om_cust_address.setPostcode(postcode);
+		om_cust_address.setShipping_mark(shipping_mark);
+		om_cust_address.setStatus(status);
+		om_cust_addressDao.update(om_cust_address);
+		System.out.println("保存成功");
+		
+		
+		
+		
+	
+	}
+	
+	public void updateOrg(){
+//		System.out.println("组织信息：");
+//		System.out.println(org_id);
+//		System.out.println(market_area);
+//		System.out.println(bussiness_manager);
+//		System.out.println(bussiness_assistant);
+		om_cust_org = om_cust_orgDao.findById(org_id);
+		om_cust_org.setMarket_area(market_area);
+		om_cust_org.setBussiness_manager(bussiness_manager);
+		om_cust_org.setBussiness_assistant(bussiness_assistant);
+		om_cust_orgDao.update(om_cust_org);
+		System.out.println("保存成功");
+		
+		
+	}
+	
+	public void updatePayment(){
+//		System.out.println("付款信息：");
+//		System.out.println(payment_id);
+//		System.out.println(invoice_group);
+//		System.out.println(markup_name);
+//		System.out.println(currency);
+//		System.out.println(payment_term);
+//		System.out.println(price_term1);
+//		System.out.println(price_term2);
+//		System.out.println(price_term3);
+//		System.out.println(discount_name);
+		om_cust_payment = om_cust_paymentDao.findById(payment_id);
+		om_cust_payment.setInvoice_group(invoice_group);
+		om_cust_payment.setMarkup_name(markup_name);
+		om_cust_payment.setCurrency(currency);
+		om_cust_payment.setPayment_term(payment_term);
+		om_cust_payment.setPrice_term1(price_term1);
+		om_cust_payment.setPrice_term2(price_term2);
+		om_cust_payment.setPrice_term3(price_term3);
+		om_cust_payment.setDiscount_name(discount_name);
+		om_cust_paymentDao.update(om_cust_payment);
+		System.out.println("保存成功");
+		
+		
+		
+	}
+	
+	public void updateCont(){
+//		System.out.println("联系人信息：");
+//		System.out.println(cont_id);
+//		System.out.println(mailfrom);
+//		System.out.println(prepr_mailto);
+//		System.out.println(po_mailto);
+//		System.out.println(ocpi_mailto);
+//		System.out.println(inv_pklist_mailto);
+		om_cust_contactors = om_cust_contactorsDao.findById(cont_id);
+		om_cust_contactors.setMailfrom(mailfrom);
+		om_cust_contactors.setPrepr_mailto(prepr_mailto);
+		om_cust_contactors.setPo_mailto(po_mailto);
+		om_cust_contactors.setOcpi_mailto(ocpi_mailto);
+		om_cust_contactors.setInv_pklist_mailto(inv_pklist_mailto);
+		om_cust_contactorsDao.update(om_cust_contactors);
+		System.out.println("保存成功");
+	}
+	
 	
 //	public void create(){
 //		om_cust_info.setCustomer_code("HZL");
@@ -389,6 +495,14 @@ public class TextAction extends ActionSupport  {
 //		 System.out.println("结束插入");
 //	}
 
+	
+	public String toshowdetail(){
+		return "for_showdetail";
+	}
+	
+	public String toupdatedetail(){
+		return "for_updatedetail";
+	}
 	public String getCustomer_name() {
 		return customer_name;
 	}
@@ -619,6 +733,59 @@ public class TextAction extends ActionSupport  {
 
 	public void setCust_id(int cust_id) {
 		this.cust_id = cust_id;
+	}
+	public int getAddress_id() {
+		return address_id;
+	}
+	public void setAddress_id(int address_id) {
+		this.address_id = address_id;
+	}
+
+	public int getPayment_id() {
+		return payment_id;
+	}
+	public void setPayment_id(int payment_id) {
+		this.payment_id = payment_id;
+	}
+
+	public int getOrg_id() {
+		return org_id;
+	}
+
+	public void setOrg_id(int org_id) {
+		this.org_id = org_id;
+	}
+
+	public int getCont_id() {
+		return cont_id;
+	}
+
+	public void setCont_id(int cont_id) {
+		this.cont_id = cont_id;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Date getInactive_date() {
+		return inactive_date;
+	}
+
+	public void setInactive_date(Date inactive_date) {
+		this.inactive_date = inactive_date;
 	}
 	
 	

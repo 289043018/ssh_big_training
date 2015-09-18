@@ -20,4 +20,6 @@ public interface Om_cust_infoDao {
 	public Om_cust_info findByOrg(int org_id);
 	
 	public int create(Om_cust_info om_cust_info);
+	
+	public void update(Om_cust_info om_cust_info);
 }

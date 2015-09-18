@@ -31,12 +31,15 @@
 					
 					/* 加载地址信息 */
 					$("input[name='country']").val(data.country);
+					$("input[name='state']").val(data.state);
+					$("input[name='city']").val(data.city);
 					$("input[name='port_of_destination']").val(data.port_of_destination);
 					$("input[name='address1']").val(data.address1);
 					$("input[name='address2']").val(data.address2);
 					$("input[name='postcode']").val(data.postcode);
 					$("input[name='shipping_mark']").val(data.shipping_mark);
 					$("input[name='status']").val(data.status);
+					$("input[name='inactive_date']").val(data.inactive_date);
 					
 					
 					
@@ -96,15 +99,16 @@
 			
 			<br><br><br><br><br><br>
 			 地址信息：<br>
-		*国家：<input type="text" name="country" readonly="readonly"    />
-		
+		*国家：<input type="text" name="country" readonly="readonly"  class="required"  />
+		州/省:<input type="text" name="state" readonly="readonly"   />
+		* 城市:<input type="text" name="city" readonly="readonly"  class="required"  />
 		*目的巷：<input type="text" readonly="readonly" name="port_of_destination" class="required"> 
 		*地址1：<input readonly="readonly" type="text" name="address1" class="required"> 
 			地址2：<input type="text" readonly="readonly" name="address2"> 
 			邮编：<input type="text" readonly="readonly" name="postcode">
 		*唛头：<input type="text" readonly="readonly" name="shipping_mark" class="required"> 
 		状态：<input type="text" readonly="readonly" name="status" value="待确认" readonly="readonly">
-		
+		失效日期：<input type="text" name="inactive_date" readonly="readonly" placeholder="yyyy-mm-dd">
 		
 		 <br>
 		<br>

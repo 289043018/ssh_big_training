@@ -57,6 +57,12 @@ public class Om_cust_addressDaoImpl implements Om_cust_addressDao {
 		this.sessionFactory = sessionFactory;
 	}
 
+	public void update(Om_cust_address om_cust_address) {
+		session = sessionFactory.getCurrentSession();
+		session.update(om_cust_address);
+		
+	}
+
 	
 	
 	

@@ -20,10 +20,15 @@ $(document).ready(function(){
     	    	check.preventDefault();//此处阻止提交表单  
     	    };
     	});
-    	
- 
     });  
-});  
+});
+
+$('#datetimepicker').datetimepicker({ 
+	minView: "month", //选择日期后，不会再跳转去选择时分秒 
+	format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+	language: 'zh-CN', //汉化 
+	autoclose:true //选择日期后自动关闭 
+	});
 
 </script>  
 
@@ -155,13 +160,19 @@ $(document).ready(function(){
 			<option value="Uruguay">Uruguay</option>
 			<option selected value="USA">USA</option>
 		</select> 
+		州/省:<input type="text" name="state"   />
+		* 城市:<input type="text" name="city" class="required"  />
 		*目的巷：<input type="text" name="port_of_destination" class="required"> 
 		*地址1：<input
 			type="text" name="address1" class="required"> 
 			地址2：<input type="text" name="address2"> 
 			邮编：<input type="text" name="postcode">
 		*唛头：<input type="text" name="shipping_mark" class="required"> 
-		状态：<input type="text" name="status" value="待确认" readonly="readonly"> <br>
+		状态：<input type="text" name="status" value="待确认" readonly="readonly">
+		失效日期：<input type="text" name="inactive_date"  placeholder="yyyy-mm-dd">
+		
+		
+		 <br>
 		<br>
 		<br> 
 		
@@ -203,7 +214,6 @@ $(document).ready(function(){
 		INV/Packing list 收件：<input type="text" name="inv_pklist_mailto"> 
 
 	</form>
-
 
 
 
