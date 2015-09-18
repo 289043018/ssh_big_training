@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.hand.dao.Om_cust_addressDao;
+import com.hand.model.Customer;
 import com.hand.model.Om_cust_address;
-import com.hand.model.Om_cust_info;
 
 
 @Repository("om_cust_addressDao")
@@ -23,7 +23,14 @@ public class Om_cust_addressDaoImpl implements Om_cust_addressDao {
 	private SessionFactory sessionFactory;
 	private Session session;
 	
-	Om_cust_address om_cust_address = new Om_cust_address();
+//	Om_cust_address om_cust_address = new Om_cust_address();
+	
+	public void create(Om_cust_address om_cust_address) {
+		session = sessionFactory.getCurrentSession();
+		session.save(om_cust_address);
+		System.out.println("插入了一个地址");
+		
+	}
 	
 	public List<Om_cust_address> findByStatus(String status) {
 		session = sessionFactory.getCurrentSession();
@@ -35,8 +42,11 @@ public class Om_cust_addressDaoImpl implements Om_cust_addressDao {
 	}
 
 	public Om_cust_address findByID(int address_id) {
-		// TODO Auto-generated method stub
-		return null;
+		session = sessionFactory.getCurrentSession();
+		Om_cust_address om_cust_address = null; 
+		om_cust_address = (Om_cust_address) session.get(Om_cust_address.class, address_id); 
+			System.out.println("查找到了："+om_cust_address.getAddress_id());
+		return om_cust_address;
 	}
 
 	public SessionFactory getSessionFactory() {
@@ -46,6 +56,8 @@ public class Om_cust_addressDaoImpl implements Om_cust_addressDao {
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
+
+	
 	
 	
 

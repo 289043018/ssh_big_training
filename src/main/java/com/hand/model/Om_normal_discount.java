@@ -1,7 +1,7 @@
 package com.hand.model;
 
 import java.security.Timestamp;
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,12 +24,12 @@ public class Om_normal_discount {
 	private int base_qty;
 	private float discount_rate;
 	private String activity;
-	private Timestamp activity_date_from;
-	private Timestamp activity_date_to;
+	private Date activity_date_from;
+	private Date activity_date_to;
 	public Om_normal_discount() {
 	}
 	public Om_normal_discount(int discount_id, String discount_name, String type, String discount_base, int base_qty,
-			float discount_rate, String activity, Timestamp activity_date_from, Timestamp activity_date_to) {
+			float discount_rate, String activity, Date activity_date_from, Date activity_date_to) {
 		super();
 		this.discount_id = discount_id;
 		this.discount_name = discount_name;
@@ -83,7 +83,7 @@ public class Om_normal_discount {
 		this.base_qty = base_qty;
 	}
 	
-	@Column(name="Discount_rate")
+	@Column(name="Discount_rate",columnDefinition="float")
 	public float getDiscount_rate() {
 		return discount_rate;
 	}
@@ -100,18 +100,18 @@ public class Om_normal_discount {
 	}
 	
 	@Column(name="Activity_date_from",columnDefinition="Timestamp")
-	public Timestamp getActivity_date_from() {
+	public Date getActivity_date_from() {
 		return activity_date_from;
 	}
-	public void setActivity_date_from(Timestamp activity_date_from) {
+	public void setActivity_date_from(Date activity_date_from) {
 		this.activity_date_from = activity_date_from;
 	}
 	
 	@Column(name="Activity_date_to",columnDefinition="Timestamp")
-	public Timestamp getActivity_date_to() {
+	public Date getActivity_date_to() {
 		return activity_date_to;
 	}
-	public void setActivity_date_to(Timestamp activity_date_to) {
+	public void setActivity_date_to(Date activity_date_to) {
 		this.activity_date_to = activity_date_to;
 	}
 }

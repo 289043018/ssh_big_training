@@ -27,6 +27,15 @@ public class Om_cust_orgDaoImpl implements Om_cust_orgDao {
 	
 	Om_cust_org om_cust_org = new Om_cust_org();
 	
+	
+	public void create(Om_cust_org om_cust_org) {
+		session = sessionFactory.getCurrentSession();
+		session.save(om_cust_org);
+		System.out.println("插入了一个组织");
+		
+	}
+	
+	
 	public Om_cust_org findById(int org_id) {
 		session = sessionFactory.getCurrentSession();
 //		Om_cust_info om_cust_info = null;
@@ -34,6 +43,8 @@ public class Om_cust_orgDaoImpl implements Om_cust_orgDao {
 		System.out.println("查找到了："+om_cust_org.getOrg_id());
 		return om_cust_org;
 	}
+
+	
 
 
 

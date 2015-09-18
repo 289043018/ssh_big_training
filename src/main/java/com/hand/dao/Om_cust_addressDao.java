@@ -9,5 +9,6 @@ import com.hand.model.Om_cust_address;
 public interface Om_cust_addressDao {
 	public List<Om_cust_address> findByStatus(String status);
 	public Om_cust_address findByID(int address_id);
+	public void create(Om_cust_address  om_cust_address);
 
 }

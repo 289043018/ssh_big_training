@@ -13,20 +13,20 @@
 
 $(document).ready(function(){
 	$("#btn").click(function(){
-		 alert("获取表单内容");
 		   var str_data=$("#form1 input").map(function(){
 				  return ($(this).attr("name")+'='+$(this).val());
 				}).get().join("&");
-		   alert( "Data Saved: " + str_data );
-		alert("开始");
+		   /* alert( "Data Saved: " + str_data );
+		alert("开始"); */
+		 $("#customer").html("正在查找数据中.....");
 		$.ajax({
 			   type: "POST",
 			   url: "Text_findByName!findByName.do?"+str_data,
 			   dataType:"json",
 			   success:function(data) {
 					var row;
-						$("#customer").html(row);
-					alert("返回数据");
+						/* $("#customer").html(row); */
+					/* alert("返回数据"); */
 						
 					 $.each(data,function(entryIndex,entry) {//遍历JSON
 											
@@ -44,6 +44,13 @@ $(document).ready(function(){
 												+ entry.bussiness_manager
 												+ "</td><td>"
 												+ entry.status
+												+ "</td><td>"
+												+ "<a href='Text_toshowdetail!toshowdetail.do?cust_id="
+												+entry.cust_id
+												+"'>查看</a>"	
+												+ "<a href='Text_toupdatedetail!toupdatedetail.do?cust_id="
+												+entry.cust_id
+												+"'>更新</a>"	
 												+ "</td></tr><br>";
 									});
 					 $("#customer").html(row);
@@ -107,8 +114,6 @@ $(document).ready(function(){
 集团公司：<input type="text" name="group_company" class="form-control" placeholder="集团公司">
 总公司：<input type="text" name="corporation" class="form-control" placeholder="总公司">
 </form>
-
-
 <td><button id="btn" onclock="btn()">提交查询</button></td>	
 
 
@@ -116,7 +121,6 @@ $(document).ready(function(){
 
 
 </div>
-
 
 
 

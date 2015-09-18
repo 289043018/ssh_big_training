@@ -38,6 +38,8 @@
 			<param name="location">/jsp/login.jsp</param>
 			</result>
 		<result name="show_success" type="redirect">/jsp/showCustomer.jsp</result>
+		<result name="for_showdetail">/jsp/showdetailCustomer.jsp</result>
+		<result name="for_updatedetail">/jsp/updateCustomer.jsp</result>
 		</action>
 	</package>
 	

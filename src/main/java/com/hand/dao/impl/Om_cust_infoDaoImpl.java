@@ -121,11 +121,11 @@ public class Om_cust_infoDaoImpl implements Om_cust_infoDao {
 	
 	
 
-	public void create(Om_cust_info om_cust_info) {
+	public int create(Om_cust_info om_cust_info) {
 		session = sessionFactory.getCurrentSession();
-		session.save(om_cust_info);
+		int cust_id = (Integer) session.save(om_cust_info);
 		System.out.println("插入了一个用户");
-
+		return cust_id;
 	}
 	
 	

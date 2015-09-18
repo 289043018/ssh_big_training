@@ -16,5 +16,11 @@ success!
 <a href="<%=path%>/Text_find!find.do">按ID查看客户</a>
 <a href="<%=path%>/Text_create!create.do">创建用户</a>
  <a href="<%=path%>/jsp/showCustomer.jsp">按名字查找用户</a> 
+  <a href="<%=path%>/jsp/createCustomer.jsp">新建</a> 
+ 
+ 
+ 
+ 
+ 
 </body>
 </html>

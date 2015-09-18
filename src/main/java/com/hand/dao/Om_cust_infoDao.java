@@ -19,5 +19,5 @@ public interface Om_cust_infoDao {
 	public Om_cust_info findByAddress(int address_id);
 	public Om_cust_info findByOrg(int org_id);
 	
-	public void create(Om_cust_info om_cust_info);
+	public int create(Om_cust_info om_cust_info);
 }
