@@ -58,6 +58,17 @@ public class LoginAction extends ActionSupport {
 //		 	        	System.out.println("获得的总页数："+pagecount);
 //		 	        	session.setAttribute("pagecount", pagecount);
 		 	        	session.setAttribute("flag", "login_success");
+//		 	        	user = userDao.findByName(uname);
+//		 	        	String str = user.getRole();
+//		 	        	System.out.println(str);
+		 	        	String role = userDao.findRole(uname);
+		 	        	System.out.println("该客户的权限为："+role);
+		 	        	session.setAttribute("role", role);
+//		 	        	String str = (String) session.getAttribute("role");
+//		 	        	System.out.println(str);
+		 	        	String ch_name = userDao.findCh_Name(uname);
+		 	        	System.out.println(ch_name+"欢迎使用系统");
+		 	        	session.setAttribute("ch_name", ch_name);
 		 	        	return SUCCESS;  
 		 	        }
 		 	        session.setAttribute("login_message", "用户名或者密码错误！");

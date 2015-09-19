@@ -195,7 +195,6 @@ $(document).ready(function () {
 			总公司：<input type="text" name="corporation" class="form-control" placeholder="总公司" maxlength="10">
 			
 			<button type="button"  id="save_cust">保存</button>
-	时间:<input type="date" />
 	</form>
 	
 			<br><br><br><br><br><br>

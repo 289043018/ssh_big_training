@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,8 @@ public class TextAction extends ActionSupport  {
 	private String po_mailto;
 	private String ocpi_mailto;
 	private String inv_pklist_mailto;
+	
+	private HttpSession httpsession = ServletActionContext.getRequest().getSession(); ;
 	
 	
 	Om_cust_info om_cust_info = new Om_cust_info();
@@ -209,7 +212,6 @@ public class TextAction extends ActionSupport  {
 		if(!customer_name.isEmpty()){
 			om_cust_infoList = om_cust_infoDao.findByName("%"+customer_name+"%");
 			ajaxback(om_cust_infoList);
-//			System.out.println("customer_name"+"不是空的");
 		}else if(!customer_code.isEmpty()){
 			om_cust_infoList = om_cust_infoDao.findByCode("%"+customer_code+"%");
 			ajaxback(om_cust_infoList);
@@ -221,6 +223,7 @@ public class TextAction extends ActionSupport  {
 			Iterator<Om_cust_address> it = om_cust_addressList.iterator();
 			while (it.hasNext()) {
 				Om_cust_address om_cust_address =  it.next();
+				
 				System.out.println("getAddress_id"+om_cust_address.getAddress_id());
 				Om_cust_info om_cust_info = om_cust_infoDao.findByAddress(om_cust_address.getAddress_id());
 				System.out.println("查找到的："+om_cust_info);
@@ -243,7 +246,11 @@ public class TextAction extends ActionSupport  {
 	public void ajaxback(List<Om_cust_info> om_cust_infoList) throws IOException{
 		JsonObject lan = null;
 		JsonArray jArray = new JsonArray();
-		for(Iterator<Om_cust_info> iterator = om_cust_infoList.iterator();iterator.hasNext();){
+		System.out.println("过滤前的数据："+om_cust_infoList);
+		List<Om_cust_info> myList = isMyCustomer(om_cust_infoList);
+		System.out.println("过滤后的数据："+myList);
+		for(Iterator<Om_cust_info> iterator = myList.iterator();iterator.hasNext();){
+			
 			om_cust_info =iterator.next();
 			System.out.println("开始添加JSON列表");
 			lan = new JsonObject();
@@ -480,6 +487,46 @@ public class TextAction extends ActionSupport  {
 		om_cust_contactorsDao.update(om_cust_contactors);
 		System.out.println("保存成功");
 	}
+	
+	public List<Om_cust_info> isMyCustomer(List<Om_cust_info> list){
+		String role = (String) httpsession.getAttribute("role");
+		System.out.println(role);
+		List<Om_cust_info> listReturn = new ArrayList<Om_cust_info>();
+		if(role.equals("财务人员")){
+			listReturn = list;
+		}else if(role.equals("业务经理")){
+			Iterator<Om_cust_info> iterator = list.iterator();
+			while(iterator.hasNext()){
+				Om_cust_info om_cust_info = iterator.next();
+				String str = om_cust_info.getOrg().getBussiness_manager();
+				System.out.println("该用户的客户业务经理为："+str);
+				String str2 = (String) httpsession.getAttribute("ch_name"); 
+				System.out.println("当前用户为："+str2);
+				if(str.equals(str2)){
+					System.out.println("您有权限查看该客户！");
+					listReturn.add(om_cust_info);
+				}
+			}
+			return listReturn;
+		}else if(role.equals("业务员")){
+			Iterator<Om_cust_info> iterator = list.iterator();
+			while(iterator.hasNext()){
+				Om_cust_info om_cust_info = iterator.next();
+				String str = om_cust_info.getOrg().getBussiness_assistant();
+				System.out.println("该用户的客户业务员为："+str);
+				String str2 = (String) httpsession.getAttribute("ch_name"); 
+				System.out.println("当前用户为："+str2);
+				if(str.equals(str2)){
+					System.out.println("您有权限查看该客户！");
+					listReturn.add(om_cust_info);
+				}
+			}
+			return listReturn;
+		}
+		return listReturn;
+		
+	}
+	
 	
 	
 //	public void create(){

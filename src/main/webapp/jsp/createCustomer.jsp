@@ -16,7 +16,7 @@ $(document).ready(function(){
     $("#xinjian").click(function(check){
     	$("form :input.required").each(function(){
     	    if($(this).val()==""){
-    	    	alert("带*号的输入框不能为空！");
+    	    	alert($(this).prop("name")+"带*号的输入框不能为空！");
     	    	check.preventDefault();//此处阻止提交表单  
     	    };
     	});

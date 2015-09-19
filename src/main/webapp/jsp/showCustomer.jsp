@@ -18,15 +18,15 @@ $(document).ready(function(){
 				}).get().join("&");
 		   /* alert( "Data Saved: " + str_data );
 		alert("开始"); */
-		 $("#customer").html("正在查找数据中.....");
+		  $("#customer").html("正在查找数据中....."); 
 		$.ajax({
 			   type: "POST",
 			   url: "Text_findByName!findByName.do?"+str_data,
 			   dataType:"json",
 			   success:function(data) {
 					var row;
-						/* $("#customer").html(row); */
-					/* alert("返回数据"); */
+						 $("#customer").html(""); 
+					/* alert("返回数据");  */
 						
 					 $.each(data,function(entryIndex,entry) {//遍历JSON
 											
