@@ -239,10 +239,9 @@ public class TextAction extends ActionSupport  {
 				om_cust_infoList = om_cust_infoDao.findByCorporation("%"+corporation+"%");
 				ajaxback(om_cust_infoList);
 			}
-
 	}
 	
-	//模糊查询返回数据
+	//模糊查询返回数据的json数组格式
 	public void ajaxback(List<Om_cust_info> om_cust_infoList) throws IOException{
 		JsonObject lan = null;
 		JsonArray jArray = new JsonArray();
@@ -418,6 +417,7 @@ public class TextAction extends ActionSupport  {
 		om_cust_address.setPostcode(postcode);
 		om_cust_address.setShipping_mark(shipping_mark);
 		om_cust_address.setStatus(status);
+		om_cust_address.setInactive_date(inactive_date);
 		om_cust_addressDao.update(om_cust_address);
 		System.out.println("保存成功");
 		
@@ -445,15 +445,15 @@ public class TextAction extends ActionSupport  {
 	
 	public void updatePayment(){
 //		System.out.println("付款信息：");
-//		System.out.println(payment_id);
-//		System.out.println(invoice_group);
-//		System.out.println(markup_name);
-//		System.out.println(currency);
-//		System.out.println(payment_term);
-//		System.out.println(price_term1);
-//		System.out.println(price_term2);
-//		System.out.println(price_term3);
-//		System.out.println(discount_name);
+		System.out.println(payment_id);
+		System.out.println(invoice_group);
+		System.out.println(markup_name);
+		System.out.println(currency);
+		System.out.println(payment_term);
+		System.out.println(price_term1);
+		System.out.println(price_term2);
+		System.out.println(price_term3);
+		System.out.println(discount_name);
 		om_cust_payment = om_cust_paymentDao.findById(payment_id);
 		om_cust_payment.setInvoice_group(invoice_group);
 		om_cust_payment.setMarkup_name(markup_name);

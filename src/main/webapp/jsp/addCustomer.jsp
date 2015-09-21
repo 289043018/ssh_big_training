@@ -65,12 +65,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <%-- <div class="form-group">
                         <label class="col-md-4 control-label">Address：</label>
                         <div class="dropdown">
                          <s:select name="address_id" list="addressList" listKey="address_id" listValue="address" headerKey="" headerValue="==请选择==" />   
 							</div>
-                    </div>
+                    </div> --%>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-md-4">
                             <button type="submit" class="btn btn-default">新建</button>

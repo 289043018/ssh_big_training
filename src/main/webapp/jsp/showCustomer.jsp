@@ -8,7 +8,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-2.1.4.min.js"></script>
+<link rel="stylesheet"
+	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
+
+ <link rel="stylesheet" href="<%=path %>/css/style1.css"> 
+ <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
+ <script src="<%=path %>/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -24,14 +29,16 @@ $(document).ready(function(){
 			   url: "Text_findByName!findByName.do?"+str_data,
 			   dataType:"json",
 			   success:function(data) {
-					var row;
+					var row="<tr><td>序号</td><td>客户名</td><td>客户代码</td><td>客户类型</td><td>市场区域</td><td>业务员</td><td>业务经理</td><td>状态</td></tr>";
+					var i=0;
 						 $("#customer").html(""); 
 					/* alert("返回数据");  */
 						
 					 $.each(data,function(entryIndex,entry) {//遍历JSON
-											
 										row += "<tr><td>"
-												+entry.customer_name
+												+ i++
+												+ "</td><td>"
+												+ entry.customer_name
 												+ "</td><td>"
 												+ entry.customer_code
 												+ "</td><td>"
@@ -45,10 +52,10 @@ $(document).ready(function(){
 												+ "</td><td>"
 												+ entry.status
 												+ "</td><td>"
-												+ "<a href='Text_toshowdetail!toshowdetail.do?cust_id="
+												+ "<a class='btn btn-primary' href='Text_toshowdetail!toshowdetail.do?cust_id="
 												+entry.cust_id
 												+"'>查看</a>"	
-												+ "<a href='Text_toupdatedetail!toupdatedetail.do?cust_id="
+												+ "<a class='btn btn-primary' href='Text_toupdatedetail!toupdatedetail.do?cust_id="
 												+entry.cust_id
 												+"'>更新</a>"	
 												+ "</td></tr><br>";
@@ -59,44 +66,6 @@ $(document).ready(function(){
 	});
 	
 });
-	
-	
-/* $(document).ready(function(){
-	 $("#btn").click(function(){
-		alert("开始");
-		$.ajax({
-			type:"POST",
-			url:"Text_findByName!findByName.do?customer_name=zi",
-			dataType:"json",
-			success:function(data) {
-							var row;
-								$("#customer").html(row);
-		
-								
-							 $.each(data,function(entryIndex,entry) {//遍历JSON
-													
-												row += "<tr><td>"
-														+entry.customer_name
-														+ "</td><td>"
-														+ entry.customer_code
-														+ "</td><td>"
-														+ entry.market_area
-														+ "</td><td>"
-														+ entry.bussiness_assistant
-														+ "</td><td>"
-														+ entry.bussiness_manager
-														+ "</td><td>"
-														+ entry.status
-														+ "</td></tr><br>";
-											});
-							 $("#customer").html(row);
-						}
-		});
-	 });
-	});
-	
-	 */
-	
 
 
     </script>
@@ -104,23 +73,86 @@ $(document).ready(function(){
 
 </head>
 <body>
-<a class="btn btn-primary"
+
+
+<div class="container">
+		<div class="head">
+			<a class="btn btn-primary"
 				href="<%= request.getContextPath() %>/Logout_Logout!Logout.do">退出</a>
-<form id="form1" Method="post">
-客户名称：<input type="text" name="customer_name" class="form-control" placeholder="客户名称">
-客户简称：<input type="text" name="customer_code" class="form-control" placeholder="客户简称">
-类型：<input type="text" name="type" class="form-control" placeholder="类型">
-状态：<input type="text" name="status" class="form-control" placeholder="待确认">
-集团公司：<input type="text" name="group_company" class="form-control" placeholder="集团公司">
-总公司：<input type="text" name="corporation" class="form-control" placeholder="总公司">
-</form>
-<td><button id="btn" onclock="btn()">提交查询</button></td>	
+		</div>
+		<div class="body">
+			<div class="menu">
+				<ul id="mytab" class="nav nav-tabs nav-stacked" role="tablist">
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">用户管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<div><a class="button" href="<%=path%>/jsp/createCustomer.jsp">新建客户</a></div>
+								<div><a class="button" href="<%=path%>/jsp/showCustomer.jsp">客户查询</a></div>
+								</div>
+						</div>
+								</li>
+					<li role="presentation"><a href="#">价格管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a></li>
+							<li role="presentation"><a href="#">折扣管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a></li>
+				</ul>
+			</div>
+			<div class="kehuguanli">
+				<div class="cust">
+					<h3>客户管理</h3>
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div>客户查询</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+
+							<form id="form1" Method="post">
+
+								<div class="col-md-4">
+									<label style="width: 70px">客户名称：</label>
+									
+										
+									
+									 <input type="text" name="customer_name" placeholder="客户名称" /> 
+
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">客户简称：</label> <input type="text"
+										name="customer_code" placeholder="客户简称" />
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">类型：</label> <input type="text"
+										name="type" placeholder="类型" />
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">状态：</label> <input type="text"
+										name="status" placeholder="待确认" />
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">集团公司：</label> <input type="text"
+										name="group_company" placeholder="集团公司" />
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">总公司：</label> <input type="text"
+										name="corporation" placeholder="总公司" />
+								</div>
+
+							</form>
+							<td><button id="btn" class="col-sm-offset-5">提交查询</button></td>
 
 
-<div id="customer">
-
-
-</div>
+							<div id="customer"></div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
 
 
 

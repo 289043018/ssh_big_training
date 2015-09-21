@@ -9,7 +9,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-2.1.4.min.js"></script>
+ <link rel="stylesheet"
+	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	
+ <link rel="stylesheet" href="<%=path %>/css/style1.css">
+ <link rel="stylesheet" href="<%=path %>/css/showdetail.css ">
+ <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
+ <script src="<%=path %>/js/bootstrap.min.js"></script> 
 <script type="text/javascript">  
 
 $(document).ready(function(){  
@@ -23,73 +29,116 @@ $(document).ready(function(){
     });  
 });
 
-$('#datetimepicker').datetimepicker({ 
-	minView: "month", //选择日期后，不会再跳转去选择时分秒 
-	format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
-	language: 'zh-CN', //汉化 
-	autoclose:true //选择日期后自动关闭 
-	});
 
 </script>  
 
 </head>
 <body>
 
-<!-- <form action="index.htm" method="post">  
-<input type="text" name="customer_name" class="form-control"
-			placeholder="客户名称"> 
-    <input type="text" name="test" id="test">  
-    <input type="submit" id="tijiao" value="提交">  
-</form>   -->
+
+<div class="container">
+		<div class="head">
+			<a class="btn btn-primary"
+				href="<%= request.getContextPath() %>/Logout_Logout!Logout.do">退出</a>
+		</div>
+		<div class="body">
+			<div class="menu">
+				<ul id="mytab" class="nav nav-tabs nav-stacked" role="tablist">
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">用户管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+							<div class="panel-body">
+								<div><a class="button" href="<%=path%>/jsp/createCustomer.jsp">新建客户</a></div>
+								<div><a class="button" href="<%=path%>/jsp/showCustomer.jsp">客户查询</a></div>
+								</div>
+						</div>
+								</li>
+					<li role="presentation"><a href="#">价格管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a></li>
+							<li role="presentation"><a href="#">折扣管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a></li>
+				</ul>
+			</div>
+			<div class="kehuguanli">
+				<div class="cust">
+					<h3>客户管理</h3>
+				</div>
+
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<div>新建客户</div>
+					</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							
+<!-- type=hidden  -->
 
 
-
-
-
-<%-- 	<a class="btn btn-primary"
-		href="<%= request.getContextPath() %>/Logout_Logout!Logout.do">退出</a>
-	<form id="form1" Method="post">
-		客户名称：<input type="text" name="customer_name" class="form-control"
-			placeholder="客户名称"> 客户简称：<input type="text"
-			name="customer_code" class="form-control" placeholder="客户简称">
-		类型：<input type="text" name="type" class="form-control"
-			placeholder="类型"> 状态：<input type="text" name="status"
-			class="form-control" placeholder="待确认"> 集团公司：<input
-			type="text" name="group_company" class="form-control"
-			placeholder="集团公司"> 总公司：<input type="text" name="corporation"
-			class="form-control" placeholder="总公司">
-	</form>
-	<td><button id="btn" onclock="btn()">新建</button></td> --%>
-	<br>
-	<br>
-	<br>
 	<form action="<%=path %>/Text_create_customer!create_customer.do" Method="POST">
 	
-	<button type="submit" id="xinjian">新建</button><button type="reset">重置</button>
-	*客户名称：<input type="text" name="customer_name" class="form-control"
-			placeholder="客户名称" class="required" > 
-			*客户简称：<!-- <input type="text" name="customer_code" class="form-control" placeholder="客户简称" class="required" maxlength="10"> -->
-			<select name="customer_code">
-		 				<option value="ATW-J">ATW-J</option>
-		 				<option value="ATW-M">ATW-M</option>
-		 				<option value="ATW">ATW</option>
-		 				<option value="GTW">GTW</option>
-		 				<option value="GBH">GBH</option>
-		 				
-		 				</select> 
-		*类型：<!-- <input type="text" name="type" class="form-control" placeholder="类型" class="required" maxlength="10">  -->
-		<select name="type">
-		 				<option value="GG20">GG20</option>
-		 				<option value="STD">STD</option>
-		 				</select> 
-		<!-- 	状态：<input type="text" name="status" class="form-control" placeholder="待确认" disabled>  -->
-			集团公司：<input type="text" name="group_company" class="form-control" placeholder="集团公司" maxlength="10"> 
-			总公司：<input type="text" name="corporation" class="form-control" placeholder="总公司" maxlength="10">
-			
-			
-			<br><br><br><br><br><br>
-			 地址信息：<br>
-		*国家： <select name="country">
+	
+
+								<div class="col-md-4">
+									<label style="width: 70px">客户名称：</label> <input type="text"
+										name="customer_name" class="required"  />
+
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">客户简称：</label> <select
+										name="customer_code">
+										<option value="ATW-J">ATW-J</option>
+										<option value="ATW-M">ATW-M</option>
+										<option value="ATW">ATW</option>
+										<option value="GTW">GTW</option>
+										<option value="GBH">GBH</option>
+
+									</select>
+								</div>
+								 <div class="col-md-4 ">
+									<label style="width: 70px">类型：</label> <select name="type">
+										<option value="GG20">GG20</option>
+										<option value="STD">STD</option>
+									</select>
+								</div> 
+								<!-- <div class="col-md-4">
+									<label style="width: 70px">状态：</label> <input type="text"
+										name="status"  disabled/>
+								</div> -->
+								<div class="col-md-4">
+									<label style="width: 70px">集团公司：</label> <input type="text"
+										name="group_company" maxlength="10">
+								</div>
+								<div class="col-md-4">
+									<label style="width: 70px">总公司：</label> <input type="text"
+										name="corporation" maxlength="10">
+								</div>
+								
+								<div class="col-md-2 col-md-offset-6">
+								<button class="btn btn-primary" type="submit" id="xinjian">新建</button>
+								</div>
+								<div class="col-md-2">
+								<button class="btn btn-primary"  type="reset">重置</button>
+								</div>
+								
+								
+								
+								<br>
+								
+
+							
+						<div id="u4" class="ax_horizontal_line">
+									<img alt="分割线" src="../img/u104_line.png" 
+										height="5" width="900">
+								</div>
+								
+
+		
+
+								<label style="width: 70px">地址信息：</label> <br>
+
+								<div >
+									<label style="width: 70px" class="col-sm-offset-3">*国家：</label>
+									<select name="country">
 			<option value="Afghanistan">Afghanistan</option>
 			<option value="Albania">Albania</option>
 			<option value="Argentina">Argentina</option>
@@ -159,40 +208,124 @@ $('#datetimepicker').datetimepicker({
 			<option value="United Kingdom">United Kingdom</option>
 			<option value="Uruguay">Uruguay</option>
 			<option selected value="USA">USA</option>
-		</select> 
-		州/省:<input type="text" name="state"   />
-		* 城市:<input type="text" name="city" class="required"  />
-		*目的巷：<input type="text" name="port_of_destination" class="required"> 
-		*地址1：<input
-			type="text" name="address1" class="required"> 
-			地址2：<input type="text" name="address2"> 
-			邮编：<input type="text" name="postcode">
-		*唛头：<input type="text" name="shipping_mark" class="required"> 
-		状态：<input type="text" name="status" value="待确认" readonly="readonly">
-		失效日期：<input type="text" name="inactive_date"  placeholder="yyyy-mm-dd">
+		</select>
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">
+										州/省:</label> <input type="text" name="state"  />
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3"> *
+										城市:</label> <input type="text" name="city" 
+										class="required" />
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">
+										*目的巷：</label> <input type="text" 
+										name="port_of_destination" class="required">
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">
+										*地址1：</label> <input  type="text" name="address1"
+										class="required">
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">地址2：</label>
+									<input type="text"  name="address2">
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">邮编：</label>
+									<input type="text"  name="postcode">
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">*唛头：</label>
+									 <input type="text" name="shipping_mark" class="required" />
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">
+										失效日期：</label> <input type="text"  name="status"
+										value="待确认" readonly="readonly">
+								</div>
+								<div>
+									<label style="width: 70px" class="col-sm-offset-3">
+										失效日期：</label> <input type="text" name="inactive_date" placeholder="yyyy-mm-dd">
+								</div>
+								
+								<br>
+								
+								<div id="u4" class="ax_horizontal_line">
+									<img alt="分割线" src="../img/u104_line.png" 
+										height="5" width="900">
+								</div>
+							
+	
+							<label style="width: 70px">付款信息：</label>	<br>
+								
+							
+							<div class="payment_info col-sm-offset-2">
+							
+							<div>
+									<div class="payment_inline">
+									<label style="width: 160px" >所属发票组：</label> 
+										<input type="text" name="invoice_group">
+									</div> 
+									<div class="payment_inline">
+									<label style="width: 160px">* 通用加价条款：</label> 
+										<input type="text" name="markup_name" class="required"> 
+									
+									</div>
+									
+								</div>
+							<div>
+									<div class="payment_inline">
+									<label style="width: 160px" > * 结算货币：</label> 
+										<input type="text" name="currency" class="required" maxlength="3"> 
+									</div> 
+									<div class="payment_inline">
+									<label style="width: 160px">  *一般折扣：</label> 
+										<input type="text" name="discount_name" class="required"> 
+									</div>
+									
+								</div>
+							<div>
+									<label style="width: 160px" >* 付款方法：</label> 
+										<input type="text"  name="payment_term" class="required" maxlength="3"> 
+						
+								</div>
+							<div>
+									<label style="width: 160px" >     价格条款1：</label> 
+										<input type="text"   name="price_term1"> 
+								</div>
+							<div>
+									<label style="width: 160px" >      价格条款2：</label> 
+										<input type="text"    name="price_term2"> 
+								</div>
+							<div>
+									<label style="width: 160px" >价格条款3：</label> 
+										<input type="text"   name="price_term3">
+								</div>	
+							
+							
+							
+							</div>
+						
+							<br>		
+								
+							
+		 
+		 
+		 <div id="u4" class="ax_horizontal_line">
+        <img alt="分割线" src="../img/u104_line.png" height="5" width="900">
+      </div>
 		
 		
-		 <br>
-		<br>
-		<br> 
-		
-		付款信息：<br>
-所属发票组： <input type="text" name="invoice_group"> 
-* 通用加价条款：<input type="text" name="markup_name" class="required"> 
- * 结算货币：<input type="text" name="currency" class="required" maxlength="3"> 
-  *一般折扣：<input type="text" name="discount_name" class="required"> 
-   * 付款方法：<input type="text" name="payment_term" class="required"> 
-    价格条款1：<input type="text" name="price_term1"> 
-     价格条款2：<input type="text" name="price_term2"> 
-		价格条款3：<input type="text" name="price_term3"> 
-		 <br>
-		<br>
-		<br> 
 		
 		
-		组织信息：<br>
-		 * 所属TEAM：<!-- <input type="text" name="market_area" class="required">  -->
-		 			<select name="market_area">
+			<label style="width: 70px">组织信息：</label> <br>
+				<div class="col-sm-offset-2">
+					<div>
+									<label style="width: 160px" >* 所属TEAM：</label> 
+										 <select name="market_area">
 		 				<option value="德国">德国</option>
 		 				<option value="亚太">亚太</option>
 		 				<option value="欧洲1">欧洲1</option>
@@ -200,26 +333,74 @@ $('#datetimepicker').datetimepicker({
 		 				<option value="欧洲2">欧洲2</option>
 		 				<option value="OEM">OEM</option>
 		 				</select> 
+								</div>	
+					<div>
+									<label style="width: 160px" >* 业务经理：</label> 
+										 <input type="text"  name="bussiness_manager" class="required">
+								</div>	
+					<div>
+									<label style="width: 160px" >* 业务助理： </label> 
+										  <input type="text" name="bussiness_assistant" class="required">
+								</div>	
+				
+				
+				</div>
+		
+				<br>
+
+		
+		 			
 		 
-		  * 业务经理： <input type="text" name="bussiness_manager" class="required"> 
-		  * 业务助理： <input type="text" name="bussiness_assistant" class="required"> 
-		  <br>
-		<br>
-		<br>
-		 联系人信息：<br>
-		 发件人邮箱： <input type="text" name="mailfrom"> 
-		 Pre PO 收件人：<input type="text" name="prepr_mailto"> 
-		  PO 收件人：<input type="text" name="po_mailto"> 
-		   OC/PI收件人：<input type="text" name="ocpi_mailto"> 
-		INV/Packing list 收件：<input type="text" name="inv_pklist_mailto"> 
+		    
+		  
+		 
+		 <div id="u4" class="ax_horizontal_line">
+        <img alt="分割线" src="../img/u104_line.png"  height="5" width="900">
+      </div>
+      
+      
+		
+		
+		
+      <label style="width: 100px">联系人信息：</label> <br>
+				<div class="col-sm-offset-2">
+					<div>
+									<label style="width: 160px" > 发件人邮箱：</label> 
+										  <input type="text" name="mailfrom">
+								</div>	
+					<div>
+									<label style="width: 160px" >Pre PO 收件人：</label> 
+										 <input type="text" name="prepr_mailto"> 
+								</div>	
+					
+					<div>
+									<label style="width: 160px" >PO 收件人：</label> 
+										  <input type="text"  name="po_mailto"> 
+								</div>	
+					<div>
+									<label style="width: 160px" >OC/PI收件人：</label> 
+										  <input type="text"  name="ocpi_mailto"> 
+								</div>	
+					<div>
+									<label style="width: 160px" >INV/Packing list 收件：</label> 
+										 <input type="text" name="inv_pklist_mailto"> 
+								</div>	
+				
+				
+				</div>
+			
+      </form>
 
-	</form>
+						</div>
+					</div>
+				</div>
 
 
 
 
-
-
+			</div>
+	</div>
+	</div>
 
 
 
