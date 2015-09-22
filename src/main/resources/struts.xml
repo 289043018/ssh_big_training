@@ -39,6 +39,7 @@
 			</result>
 		<result name="show_success" type="redirect">/jsp/showCustomer.jsp</result>
 		<result name="for_showdetail">/jsp/showdetailCustomer.jsp</result>
+		<result name="for_updatedetail">/jsp/updateCustomer.jsp</result>
 		<result name="doit">/jsp/showdetailCustomer.jsp</result>
 		</action>
 	</package>
