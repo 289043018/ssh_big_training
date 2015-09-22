@@ -12,6 +12,7 @@
 	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
 
  <link rel="stylesheet" href="<%=path %>/css/style1.css"> 
+  <link rel="stylesheet" href="<%=path %>/css/CustomerShow.css"> 
  <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
  <script src="<%=path %>/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
@@ -33,7 +34,7 @@ $(document).ready(function(){
 			   url: "Text_findByName!findByName.do?"+str_data,
 			   dataType:"json",
 			   success:function(data) {
-					var row="<tr><td>序号</td><td>客户名</td><td>客户代码</td><td>客户类型</td><td>市场区域</td><td>业务员</td><td>业务经理</td><td>状态</td></tr>";
+					var row="<tr><td>序号</td><td>客户名</td><td>客户代码</td><td>客户类型</td><td>市场区域</td><td>业务员</td><td>业务经理</td><td>状态</td><td>操作</td><td>确认</td></tr>";
 					var i=0;
 						 $("#customer").html(""); 
 					/* alert("返回数据");  */
@@ -61,7 +62,7 @@ $(document).ready(function(){
 												+"'>查看</a>"	
 												+ "<s:if test='0==#session.cando'><a class='btn btn-primary' href='Text_toupdatedetail!toupdatedetail.do?cust_id="
 												+entry.cust_id
-												+"'>更新</a></s:if>"	
+												+"'>更新</a></td><td></s:if>"	
 												+ "<s:if test='1==#session.cando'><a class='btn btn-primary doit' href='Text_doit!doit.do?cust_id="
 												+entry.cust_id
 												+"'>确认</a></s:if>"
@@ -161,12 +162,10 @@ $(document).ready(function(){
 							<td><button id="btn" class="col-sm-offset-5">提交查询</button></td>
 
 
-							<div id="customer"></div>
-							<%-- <s:if test=/"'财务人员'==#session.role/">
-						<a class='btn btn-primary doit' href='Text_toupdatedetail!toupdatedetail.do?cust_id=entry.cust_id"'>确认</a>
-						
-						</s:if>  --%>
-						
+							 
+							<table id="customer" class="table table-bordered table-hover table-condensed ">
+							
+						</table>
 						</div>
 					</div>
 				</div>

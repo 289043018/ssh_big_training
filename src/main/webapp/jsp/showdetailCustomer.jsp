@@ -231,10 +231,11 @@
 									<label style="width: 70px" class="col-sm-offset-3">
 										状态：</label> <input type="text" readonly="readonly" name="status"
 										value="待确认" readonly="readonly">
-										<s:if test="0==#session.cando">
-										<s:if test='1==#session.cando'><a class="btn btn-primary doit" href="Text_doit!doit.do?cust_id=${cust_id}">确认</a></s:if>
-										
+										<s:if test='1==#session.cando'>
+										<a class="btn btn-primary doit" href="Text_doit!doit.do?cust_id=${cust_id}">确认</a>
 										</s:if>
+										
+										
 								</div>
 								<div>
 									<label style="width: 70px" class="col-sm-offset-3">
