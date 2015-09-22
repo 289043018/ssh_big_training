@@ -536,24 +536,24 @@
 								<div class="col-sm-offset-2">
 									<div>
 										<label style="width: 160px"> 发件人邮箱：</label> <input
-											type="text" readonly="readonly" name="mailfrom">
+											type="text"  name="mailfrom">
 									</div>
 									<div>
 										<label style="width: 160px">Pre PO 收件人：</label> <input
-											type="text" readonly="readonly" name="prepr_mailto">
+											type="text"  name="prepr_mailto">
 									</div>
 
 									<div>
 										<label style="width: 160px">PO 收件人：</label> <input
-											type="text" readonly="readonly" name="po_mailto">
+											type="text"  name="po_mailto">
 									</div>
 									<div>
 										<label style="width: 160px">OC/PI收件人：</label> <input
-											type="text" readonly="readonly" name="ocpi_mailto">
+											type="text"  name="ocpi_mailto">
 									</div>
 									<div>
 										<label style="width: 160px">INV/Packing list 收件：</label> <input
-											type="text" readonly="readonly" name="inv_pklist_mailto">
+											type="text"  name="inv_pklist_mailto">
 									</div>
 
 
