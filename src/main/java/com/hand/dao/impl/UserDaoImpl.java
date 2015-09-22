@@ -40,6 +40,11 @@ public class UserDaoImpl implements UserDao {
 		}  
 		return false;     
 	}  
+	
+	
+	
+	
+	
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
@@ -76,6 +81,17 @@ public class UserDaoImpl implements UserDao {
 			}  
 		}  
 		return "nothing"; 
+	}
+
+
+
+
+
+	public void createUser(User user) {
+		session = sessionFactory.getCurrentSession();
+		session.save(user);
+		System.out.println("插入了一个用户");
+		
 	}
 
 	

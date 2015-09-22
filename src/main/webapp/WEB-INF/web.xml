@@ -52,7 +52,7 @@
      <!-- Struts2过滤器拦截所有的.action请求 -->
      <filter-mapping>
          <filter-name>Struts2Filter</filter-name>
-         <url-pattern>*.do</url-pattern>
+         <url-pattern>/*</url-pattern>
      </filter-mapping>
        <!-- openSessionInView配置mapping -->
      <filter-mapping>

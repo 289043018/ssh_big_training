@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%String path = request.getContextPath(); %>
     <%@ page isELIgnored="false"%>
-<%@taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,6 +15,10 @@
  <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
  <script src="<%=path %>/js/bootstrap.min.js"></script> 
 <script type="text/javascript">
+/* $(document).ready(function(){
+	$("#doit").attr({readonly:readonly});
+});
+ */
 
 $(document).ready(function(){
 	$("#btn").click(function(){
@@ -55,9 +59,12 @@ $(document).ready(function(){
 												+ "<a class='btn btn-primary' href='Text_toshowdetail!toshowdetail.do?cust_id="
 												+entry.cust_id
 												+"'>查看</a>"	
-												+ "<a class='btn btn-primary' href='Text_toupdatedetail!toupdatedetail.do?cust_id="
+												+ "<s:if test='0==#session.cando'><a class='btn btn-primary' href='Text_toupdatedetail!toupdatedetail.do?cust_id="
 												+entry.cust_id
-												+"'>更新</a>"	
+												+"'>更新</a></s:if>"	
+												+ "<s:if test='1==#session.cando'><a class='btn btn-primary doit' href='Text_doit!doit.do?cust_id="
+												+entry.cust_id
+												+"'>确认</a></s:if>"
 												+ "</td></tr><br>";
 									});
 					 $("#customer").html(row);
@@ -81,9 +88,9 @@ $(document).ready(function(){
 				href="<%= request.getContextPath() %>/Logout_Logout!Logout.do">退出</a>
 		</div>
 		<div class="body">
-			<div class="menu">
+			<<div class="menu">
 				<ul id="mytab" class="nav nav-tabs nav-stacked" role="tablist">
-					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">用户管理<span
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">客户管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a>
 							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
@@ -96,6 +103,15 @@ $(document).ready(function(){
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
 							<li role="presentation"><a href="#">折扣管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">用户管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+							<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+							<div class="panel-body">
+								<div><a class="button" href="<%=path%>/jsp/createUser.jsp">新建用户</a></div>
+								
+								</div>
+						</div>
+								</li>
 				</ul>
 			</div>
 			<div class="kehuguanli">
@@ -146,6 +162,10 @@ $(document).ready(function(){
 
 
 							<div id="customer"></div>
+							<%-- <s:if test=/"'财务人员'==#session.role/">
+						<a class='btn btn-primary doit' href='Text_toupdatedetail!toupdatedetail.do?cust_id=entry.cust_id"'>确认</a>
+						
+						</s:if>  --%>
 						
 						</div>
 					</div>

@@ -23,6 +23,7 @@ import com.hand.dao.Om_cust_contactorsDao;
 import com.hand.dao.Om_cust_infoDao;
 import com.hand.dao.Om_cust_orgDao;
 import com.hand.dao.Om_cust_paymentDao;
+import com.hand.dao.UserDao;
 import com.hand.dao.impl.Om_cust_addressDaoImpl;
 import com.hand.model.Om_cust_address;
 import com.hand.model.Om_cust_contactors;
@@ -30,6 +31,7 @@ import com.hand.model.Om_cust_info;
 import com.hand.model.Om_cust_org;
 import com.hand.model.Om_cust_payment;
 import com.hand.model.Om_normal_discount;
+import com.hand.model.User;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -52,8 +54,7 @@ public class TextAction extends ActionSupport  {
 	private String state;
 	private String city;
 	private Date inactive_date;
-	
-	
+
 	//付款信息
 	private int payment_id;
 	private String invoice_group;
@@ -64,16 +65,13 @@ public class TextAction extends ActionSupport  {
 	private String price_term1;
 	private String price_term2;
 	private String price_term3;
-	
-	
+
 	//组织信息
 	private int org_id;
 	private String market_area;
 	private String bussiness_manager;
 	private String bussiness_assistant;
-	
-	
-	
+
 	//联系人信息
 	private int cont_id;
 	private String mailfrom;
@@ -81,15 +79,21 @@ public class TextAction extends ActionSupport  {
 	private String po_mailto;
 	private String ocpi_mailto;
 	private String inv_pklist_mailto;
+	//用户信息
+	private int user_id;
+	private String user_name;
+	private String user_pwd;
+	private String ch_name;
+	private int staff_id;
+	private String en_name;
+	private String role;
+	private int phone;
+	private String email;
 	
 	private HttpSession httpsession = ServletActionContext.getRequest().getSession(); ;
 	
 	
-	Om_cust_info om_cust_info = new Om_cust_info();
-	Om_cust_address	om_cust_address = new Om_cust_address();
-	Om_cust_contactors	om_cust_contactors = new Om_cust_contactors();
-	Om_cust_payment	om_cust_payment = new Om_cust_payment();
-	Om_cust_org	om_cust_org = new Om_cust_org();
+	
 	
 	Om_normal_discount om_normal_discount = new Om_normal_discount();
 	
@@ -101,8 +105,30 @@ public class TextAction extends ActionSupport  {
 	Om_cust_orgDao om_cust_orgDao = (Om_cust_orgDao) ac.getBean("om_cust_orgDao");
 	Om_cust_contactorsDao om_cust_contactorsDao = (Om_cust_contactorsDao) ac.getBean("om_cust_contactorsDao");
 	Om_cust_paymentDao om_cust_paymentDao = (Om_cust_paymentDao) ac.getBean("om_cust_paymentDao");
+	User user = (User) ac.getBean("user");
+	UserDao userDao = (UserDao) ac.getBean("userDao");
 //	Om_cust_info om_cust_info = (Om_cust_info) ac.getBean("om_cust_info");
+	Om_cust_info om_cust_info = new Om_cust_info();
+	Om_cust_address	om_cust_address = new Om_cust_address();
+	Om_cust_contactors	om_cust_contactors = new Om_cust_contactors();
+	Om_cust_payment	om_cust_payment = new Om_cust_payment();
+	Om_cust_org	om_cust_org = new Om_cust_org();
 	
+	
+	//创建用户
+	public String createUser(){
+		user.setUser_name(user_name);
+		user.setUser_pwd(user_pwd);
+		user.setCh_name(ch_name);
+		user.setEn_name(en_name);
+		user.setStaff_id(staff_id);
+		user.setRole(role);
+		user.setEmail(email);
+		user.setPhone(phone);
+		userDao.createUser(user);
+		System.out.println("创建用户成功！");
+		return "success";
+	}
 	
 	
 	//创建用户详细信息
@@ -197,11 +223,15 @@ public class TextAction extends ActionSupport  {
 
 	}
 
-	//按ID查找客户信息
-	public void find(){
-		Om_cust_info om_cust_info = om_cust_infoDao.findById(4);
+	//按客户确认
+	public String doit(){
+		om_cust_info = om_cust_infoDao.findById(cust_id);
 		System.out.println(om_cust_info.getCustomer_name());
-
+		int id = om_cust_info.getAddress().getAddress_id();
+		om_cust_address = om_cust_addressDao.findByID(id);
+		om_cust_address.setStatus("确认");
+		om_cust_addressDao.update(om_cust_address);
+		return "doit";
 	}
 	
 	//模糊查询方法
@@ -833,6 +863,78 @@ public class TextAction extends ActionSupport  {
 
 	public void setInactive_date(Date inactive_date) {
 		this.inactive_date = inactive_date;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
+	}
+
+	public String getUser_pwd() {
+		return user_pwd;
+	}
+
+	public void setUser_pwd(String user_pwd) {
+		this.user_pwd = user_pwd;
+	}
+
+	public String getCh_name() {
+		return ch_name;
+	}
+
+	public void setCh_name(String ch_name) {
+		this.ch_name = ch_name;
+	}
+
+	public int getStaff_id() {
+		return staff_id;
+	}
+
+	public void setStaff_id(int staff_id) {
+		this.staff_id = staff_id;
+	}
+
+	public String getEn_name() {
+		return en_name;
+	}
+
+	public void setEn_name(String en_name) {
+		this.en_name = en_name;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	

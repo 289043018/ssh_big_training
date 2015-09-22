@@ -44,7 +44,7 @@ $(document).ready(function(){
 		<div class="body">
 			<div class="menu">
 				<ul id="mytab" class="nav nav-tabs nav-stacked" role="tablist">
-					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">用户管理<span
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">客户管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a>
 							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
@@ -57,6 +57,15 @@ $(document).ready(function(){
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
 							<li role="presentation"><a href="#">折扣管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">用户管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+							<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+							<div class="panel-body">
+								<div><a class="button" href="<%=path%>/jsp/createUser.jsp">新建用户</a></div>
+								
+								</div>
+						</div>
+								</li>
 				</ul>
 			</div>
 			<div class="kehuguanli">

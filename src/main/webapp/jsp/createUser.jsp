@@ -7,12 +7,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>用户创建页面</title>
 <link rel="stylesheet"
 	href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"> 
  <link rel="stylesheet" href="<%=path %>/css/style1.css">
  <script src="<%=path %>/js/jquery-2.1.4.min.js"></script>
  <script src="<%=path %>/js/bootstrap.min.js"></script> 
+ <script type="text/javascript">  
+ $(document).ready(function(){  
+    $("#xinjian").click(function(check){
+    	$("form :input.required").each(function(){
+    	    if($(this).val()==""){
+    	    	alert($(this).prop("name")+"带*号的输入框不能为空！");
+    	    	check.preventDefault();//此处阻止提交表单  
+    	    };
+    	});
+    });  
+});
+</script>
 </head>
 <body>
 
@@ -56,7 +68,62 @@
                 </div>
                  
                 <div class="panel-body">
-                  <%=session.getAttribute("ch_name") %><p>欢迎用户使用系统，请点击右边导航栏进入相应页面！</p>
+                 
+                 
+                <form action="<%=path %>/Text_createUser!createUser.do" Method="POST">
+                 <label style="width: 70px">新建用户：</label> <br>
+				<div class="col-sm-offset-2">
+				<div>
+									<label style="width: 160px" >*账号：</label> 
+										 <input type="text"  name="user_name" class="required">
+								</div>	
+				<div>
+									<label style="width: 160px" >*密码：</label> 
+										 <input type="text"  name="user_pwd" class="required">
+								</div>	
+				<div>
+									<label style="width: 160px" >*中文名：</label> 
+										 <input type="text"  name="ch_name" class="required">
+								</div>
+								<div>
+									<label style="width: 160px" >*工号：</label> 
+										 <input type="text"  name="staff_id" class="required">
+								</div>
+								<div>
+									<label style="width: 160px" >英文名：</label> 
+										 <input type="text"  name="en_name" >
+								</div>
+										
+				
+					<div>
+									<label style="width: 160px" >职位：</label> 
+										 <select name="role" >
+		 				<option value="财务人员">财务人员</option>
+		 				<option value="业务经理">业务经理</option>
+		 				<option value="业务员">业务员</option>
+		 				</select> 
+								</div>	
+					<div>
+									<label style="width: 160px" >联系电话：</label> 
+										 <input type="text"  name="phone" >
+								</div>	
+					<div>
+									<label style="width: 160px" >邮箱地址： </label> 
+										  <input type="text" name="email" >
+								</div>	
+								<div class="col-md-2 col-md-offset-6">
+								<button class="btn btn-primary" type="submit" id="xinjian">新建</button>
+								</div>
+				
+				
+				</div>
+                
+                
+                
+                
+                </form>
+
+
                 </div>
                 
             </div>

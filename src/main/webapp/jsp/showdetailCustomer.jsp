@@ -75,6 +75,21 @@
 				}
 			});
 			alert("数据加载完毕！")
+			
+			$("#queren").click(
+					function() {
+						$.ajax({
+							type : "POST",
+							url: "Text_showdetail!showdetail.do?cust_id="+$("input[name='show_id']").val(),
+							dataType : "json",
+							success : function() {
+								alert("保存成功");
+							}
+						});
+
+					});	
+			
+			
 
 	
  }); 
@@ -93,7 +108,7 @@
 		<div class="body">
 			<div class="menu">
 				<ul id="mytab" class="nav nav-tabs nav-stacked" role="tablist">
-					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">用户管理<span
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">客户管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a>
 							<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 							<div class="panel-body">
@@ -106,6 +121,15 @@
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
 							<li role="presentation"><a href="#">折扣管理<span
 							class="glyphicon glyphicon-chevron-right"></span></a></li>
+					<li role="presentation"><a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">用户管理<span
+							class="glyphicon glyphicon-chevron-right"></span></a>
+							<div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+							<div class="panel-body">
+								<div><a class="button" href="<%=path%>/jsp/createUser.jsp">新建用户</a></div>
+								
+								</div>
+						</div>
+								</li>
 				</ul>
 			</div>
 			<div class="kehuguanli">
@@ -173,11 +197,11 @@
 								</div>
 								<div>
 									<label style="width: 70px" class="col-sm-offset-3">
-										州/省:</label> <input type="text" name="state" readonly="readonly" />
+										州/省：</label> <input type="text" name="state" readonly="readonly" />
 								</div>
 								<div>
 									<label style="width: 70px" class="col-sm-offset-3"> *
-										城市:</label> <input type="text" name="city" readonly="readonly"
+										城市：</label> <input type="text" name="city" readonly="readonly"
 										class="required" />
 								</div>
 								<div>
@@ -205,8 +229,12 @@
 								</div>
 								<div>
 									<label style="width: 70px" class="col-sm-offset-3">
-										失效日期：</label> <input type="text" readonly="readonly" name="status"
+										状态：</label> <input type="text" readonly="readonly" name="status"
 										value="待确认" readonly="readonly">
+										<s:if test="0==#session.cando">
+										<s:if test='1==#session.cando'><a class="btn btn-primary doit" href="Text_doit!doit.do?cust_id=${cust_id}">确认</a></s:if>
+										
+										</s:if>
 								</div>
 								<div>
 									<label style="width: 70px" class="col-sm-offset-3">

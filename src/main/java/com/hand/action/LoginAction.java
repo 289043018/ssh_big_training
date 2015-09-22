@@ -24,9 +24,7 @@ public class LoginAction extends ActionSupport {
 
 	@Autowired 
 	ApplicationContext ac = new ClassPathXmlApplicationContext(new String[]{"spring.xml","spring-hibernate.xml"});
-	CustomerDao customerDao =(CustomerDao) ac.getBean("customerDao");
-	Customer customer =  (Customer) ac.getBean("customer");
-	PageDao pageDao= (PageDao) ac.getBean("pageDao");
+	/*CustomerDao customerDao =(CustomerDao) ac.getBean("customerDao");*/
 	User user = (User) ac.getBean("user");
 	UserDao userDao = (UserDao) ac.getBean("userDao");
 	 
@@ -64,6 +62,11 @@ public class LoginAction extends ActionSupport {
 		 	        	String role = userDao.findRole(uname);
 		 	        	System.out.println("该客户的权限为："+role);
 		 	        	session.setAttribute("role", role);
+		 	        	if(role=="财务人员"){
+		 	        		session.setAttribute("cando", "1");
+		 	        	}else{
+		 	        		session.setAttribute("cando", "0");
+		 	        	}
 //		 	        	String str = (String) session.getAttribute("role");
 //		 	        	System.out.println(str);
 		 	        	String ch_name = userDao.findCh_Name(uname);
