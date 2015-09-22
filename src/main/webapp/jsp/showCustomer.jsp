@@ -62,7 +62,7 @@ $(document).ready(function(){
 												+"'>查看</a>"	
 												+ "<s:if test='0==#session.cando'><a class='btn btn-primary' href='Text_toupdatedetail!toupdatedetail.do?cust_id="
 												+entry.cust_id
-												+"'>更新</a></td><td></s:if>"	
+												+"'>更新</a></s:if></td><td>"	
 												+ "<s:if test='1==#session.cando'><a class='btn btn-primary doit' href='Text_doit!doit.do?cust_id="
 												+entry.cust_id
 												+"'>确认</a></s:if>"

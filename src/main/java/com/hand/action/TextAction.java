@@ -132,7 +132,7 @@ public class TextAction extends ActionSupport  {
 	
 	
 	//创建用户详细信息
-	public void create_customer(){
+	public String create_customer(){
 		//添加地址表
 //		System.out.println("地址信息：");
 //		System.out.println(country);
@@ -220,6 +220,8 @@ public class TextAction extends ActionSupport  {
 		om_cust_contactors.setInv_pklist_mailto(inv_pklist_mailto);
 		om_cust_contactors.setCust_id(cust_id);
 		om_cust_contactorsDao.create(om_cust_contactors);
+		
+		return "success";
 
 	}
 

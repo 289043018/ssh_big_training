@@ -62,7 +62,7 @@ public class LoginAction extends ActionSupport {
 		 	        	String role = userDao.findRole(uname);
 		 	        	System.out.println("该客户的权限为："+role);
 		 	        	session.setAttribute("role", role);
-		 	        	if(role=="财务人员"){
+		 	        	if(role.equals("财务人员")){
 		 	        		session.setAttribute("cando", "1");
 		 	        	}else{
 		 	        		session.setAttribute("cando", "0");
